@@ -1,0 +1,20 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./database.db"
+}
+
+model User {
+  id               String             @id
+  commandExecution CommandExecution[]
+}
+
+model CommandExecution {
+  id     String @id @default(uuid())
+  name   String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+}
