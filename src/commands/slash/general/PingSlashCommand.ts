@@ -1,4 +1,4 @@
-import type { ChatInputCommandInteraction } from "discord.js";
+import type { CacheType, ChatInputCommandInteraction } from "discord.js";
 import { BaseSlashCommand, type Flucord } from "flucord";
 
 export class PingSlashCommand extends BaseSlashCommand {
@@ -11,7 +11,7 @@ export class PingSlashCommand extends BaseSlashCommand {
     });
   }
 
-  async execute(interaction: ChatInputCommandInteraction) {
+  async execute(interaction: ChatInputCommandInteraction<CacheType>) {
     await this.flucord.prisma.commandExecution.create({
       data: {
         name: interaction.commandName,
