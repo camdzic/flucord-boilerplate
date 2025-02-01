@@ -1,5 +1,15 @@
-import type { CacheType, ChatInputCommandInteraction } from "discord.js";
-import { BaseSlashCommand, type Flucord } from "flucord";
+import {
+  type CacheType,
+  ChannelType,
+  type ChatInputCommandInteraction
+} from "discord.js";
+import {
+  BaseSlashCommand,
+  ChannelTypeGuard,
+  type Flucord,
+  Time
+} from "flucord";
+import { CooldownGuard } from "../../../guards/CooldownGuard";
 
 export class PingSlashCommand extends BaseSlashCommand {
   constructor(flucord: Flucord) {
@@ -7,7 +17,34 @@ export class PingSlashCommand extends BaseSlashCommand {
       name: "ping",
       description: "Pong!",
       category: "general",
-      guildPlusUser: true
+      guildPlusUser: true,
+      guards: [
+        new ChannelTypeGuard(
+          ChannelType.GuildText,
+          ChannelType.DM,
+          ChannelType.GroupDM
+        ),
+        new CooldownGuard(
+          interaction => {
+            // If the user has nitro, the cooldown is 30 seconds
+            if (interaction.member.premiumSince) {
+              return Time.Second * 30;
+            }
+
+            // Otherwise, the cooldown is 1 minute
+            return Time.Minute;
+          },
+          interaction => {
+            if (interaction.member.premiumSince) {
+              // If the user has nitro, the threshold is 3 uses
+              return 3;
+            }
+
+            // Otherwise, the threshold is 1 use
+            return 1;
+          }
+        )
+      ]
     });
   }
 
