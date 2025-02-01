@@ -7,8 +7,8 @@ export class ReadyEvent extends BaseEvent<"ready"> {
     });
   }
 
-  execute() {
-    this.connectToDatabase();
+  async execute() {
+    await this.connectToDatabase();
   }
 
   private async connectToDatabase() {
