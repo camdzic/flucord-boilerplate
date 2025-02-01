@@ -20,7 +20,7 @@
     "typescript": "^5.7.3"
   },
   "dependencies": {
-    "@prisma/client": "6.2.1",
+    "@prisma/client": "6.3.0",
     "discord.js": "^14.17.3",
     "flucord": "latest"
   }
