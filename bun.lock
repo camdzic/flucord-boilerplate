@@ -7,7 +7,7 @@
         "@prisma/client": "6.3.0",
         "@sapphire/ratelimits": "^2.4.11",
         "discord.js": "^14.17.3",
-        "flucord": "1.4.5",
+        "flucord": "1.4.6",
       },
       "devDependencies": {
         "@biomejs/biome": "1.9.4",
@@ -92,7 +92,7 @@
 
     "fast-deep-equal": ["fast-deep-equal@3.1.3", "", {}, "sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q=="],
 
-    "flucord": ["flucord@1.4.5", "", { "dependencies": { "colorette": "^2.0.20", "cron": "^3.5.0", "ts-cron-validator": "^1.1.5" }, "peerDependencies": { "typescript": "^5.7.3" } }, "sha512-MTtmG3HNlhE1bMyd3fcjqrOwxoO0Jj7j4LIDTCHIZo8w+Ga+FQwYYopKf5EtdcDgwtfO4+r9Ip1w7zDITlzAFw=="],
+    "flucord": ["flucord@1.4.6", "", { "dependencies": { "colorette": "^2.0.20", "cron": "^3.5.0", "ts-cron-validator": "^1.1.5" }, "peerDependencies": { "typescript": "^5.7.3" } }, "sha512-lPbkR3rmgRbh7eacpF3ZrWglt726FtuoJ81J4m43n7z3V7chv9AE7TuCNE4KnQjWiuXa7ioTZShbNOGABwA3yA=="],
 
     "fsevents": ["fsevents@2.3.3", "", { "os": "darwin" }, "sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw=="],
 
