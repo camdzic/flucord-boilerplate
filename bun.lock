@@ -235,7 +235,7 @@
 
     "find-up": ["find-up@5.0.0", "", { "dependencies": { "locate-path": "^6.0.0", "path-exists": "^4.0.0" } }, "sha512-78/PXT1wlLLDgTzDs7sjq9hzz0vXD+zn+7wypEe4fXQxCmdmqfGsEPQxmiCSQI3ajFV91bVSsvNtrJRiW6nGng=="],
 
-    "flucord": ["flucord@1.4.4", "", { "dependencies": { "colorette": "^2.0.20", "cron": "^3.5.0", "ts-cron-validator": "^1.1.5" }, "peerDependencies": { "typescript": "^5.7.3" } }, "sha512-zYKLB9PqCWK3CjTioCQn3k8YeaBR3YA5uM/g6thlY7GTUcNRGT11tfNOr9OAGAofB4DP4D4iMPFbsp925arPhQ=="],
+    "flucord": ["flucord@1.4.6", "", { "dependencies": { "colorette": "^2.0.20", "cron": "^3.5.0", "ts-cron-validator": "^1.1.5" }, "peerDependencies": { "typescript": "^5.7.3" } }, "sha512-lPbkR3rmgRbh7eacpF3ZrWglt726FtuoJ81J4m43n7z3V7chv9AE7TuCNE4KnQjWiuXa7ioTZShbNOGABwA3yA=="],
 
     "fp-ts": ["fp-ts@2.16.0", "", {}, "sha512-bLq+KgbiXdTEoT1zcARrWEpa5z6A/8b7PcDW7Gef3NSisQ+VS7ll2Xbf1E+xsgik0rWub/8u0qP/iTTjj+PhxQ=="],
 
