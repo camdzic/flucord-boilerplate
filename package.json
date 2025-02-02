@@ -9,12 +9,14 @@
   "scripts": {
     "start": "bun run src/index.ts",
     "dev": "bun run --watch src/index.ts",
-    "biome": "biome check --write --unsafe"
+    "biome": "biome check --write --unsafe",
+    "prisma-case-format": "prisma-case-format --file=prisma/schema.prisma --map-field-case=snake --map-table-case=snake,plural"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
     "@types/bun": "1.2.2",
-    "prisma": "^6.3.0"
+    "prisma": "^6.3.0",
+    "prisma-case-format": "^2.2.1"
   },
   "peerDependencies": {
     "typescript": "^5.7.3"

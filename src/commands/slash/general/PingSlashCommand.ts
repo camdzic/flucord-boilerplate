@@ -49,17 +49,22 @@ export class PingSlashCommand extends BaseSlashCommand {
   }
 
   async execute(interaction: ChatInputCommandInteraction<CacheType>) {
-    await this.flucord.prisma.commandExecution.create({
-      data: {
-        name: interaction.commandName,
-        user: {
-          connectOrCreate: {
-            where: {
-              id: interaction.user.id
-            },
-            create: {
-              id: interaction.user.id
-            }
+    await this.flucord.prisma.user.upsert({
+      where: {
+        id: interaction.user.id
+      },
+      create: {
+        id: interaction.user.id,
+        commandExecution: {
+          create: {
+            name: interaction.commandName
+          }
+        }
+      },
+      update: {
+        commandExecution: {
+          create: {
+            name: interaction.commandName
           }
         }
       }
