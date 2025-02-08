@@ -25,6 +25,6 @@
     "@prisma/client": "6.3.0",
     "@sapphire/ratelimits": "^2.4.11",
     "discord.js": "^14.17.3",
-    "flucord": "1.4.6"
+    "flucord": "1.5.0"
   }
 }

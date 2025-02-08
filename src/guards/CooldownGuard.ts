@@ -1,9 +1,17 @@
 import { RateLimitManager } from "@sapphire/ratelimits";
-import type {
-  CacheType,
-  ChatInputCommandInteraction,
-  MessageContextMenuCommandInteraction,
-  UserContextMenuCommandInteraction
+import {
+  type ButtonInteraction,
+  type CacheType,
+  type ChannelSelectMenuInteraction,
+  type ChatInputCommandInteraction,
+  InteractionType,
+  type MentionableSelectMenuInteraction,
+  type MessageContextMenuCommandInteraction,
+  type ModalSubmitInteraction,
+  type RoleSelectMenuInteraction,
+  type StringSelectMenuInteraction,
+  type UserContextMenuCommandInteraction,
+  type UserSelectMenuInteraction
 } from "discord.js";
 import {
   BaseGuard,
@@ -17,11 +25,16 @@ type CooldownResolver = (
     | ChatInputCommandInteraction<"cached">
     | MessageContextMenuCommandInteraction<"cached">
     | UserContextMenuCommandInteraction<"cached">
+    | ButtonInteraction<"cached">
+    | StringSelectMenuInteraction<"cached">
+    | ChannelSelectMenuInteraction<"cached">
+    | RoleSelectMenuInteraction<"cached">
+    | MentionableSelectMenuInteraction<"cached">
+    | UserSelectMenuInteraction<"cached">
+    | ModalSubmitInteraction<"cached">
 ) => number;
 
-export class CooldownGuard extends BaseGuard<
-  "slashCommand" | "messageContextMenuCommand" | "userContextMenuCommand"
-> {
+export class CooldownGuard extends BaseGuard<"any"> {
   private readonly rateLimitManagers: Map<string, RateLimitManager>;
 
   private time: CooldownResolver | number;
@@ -32,11 +45,7 @@ export class CooldownGuard extends BaseGuard<
     threshold: CooldownResolver | number = 1
   ) {
     super({
-      types: [
-        "slashCommand",
-        "messageContextMenuCommand",
-        "userContextMenuCommand"
-      ]
+      types: ["any"]
     });
 
     this.rateLimitManagers = new Map();
@@ -50,6 +59,13 @@ export class CooldownGuard extends BaseGuard<
       | ChatInputCommandInteraction<CacheType>
       | MessageContextMenuCommandInteraction<CacheType>
       | UserContextMenuCommandInteraction<CacheType>
+      | ButtonInteraction<CacheType>
+      | StringSelectMenuInteraction<CacheType>
+      | ChannelSelectMenuInteraction<CacheType>
+      | RoleSelectMenuInteraction<CacheType>
+      | MentionableSelectMenuInteraction<CacheType>
+      | UserSelectMenuInteraction<CacheType>
+      | ModalSubmitInteraction<CacheType>
   ) {
     if (!interaction.inCachedGuild()) {
       throw new GuardExecutionFailException(
@@ -57,12 +73,13 @@ export class CooldownGuard extends BaseGuard<
       );
     }
 
+    const identifier = this.getInteractionIdentifier(interaction);
     const realTime = this.resolveValue(this.time, interaction);
     const realThreshold = this.resolveValue(this.threshold, interaction);
 
-    if (interaction.member.permissions.has("ManageGuild")) {
+    if (!interaction.member.permissions.has("ManageGuild")) {
       const rateLimitManager = this.getRateLimitManager(
-        interaction.commandId,
+        identifier,
         realTime,
         realThreshold
       );
@@ -82,12 +99,45 @@ export class CooldownGuard extends BaseGuard<
     }
   }
 
+  private getInteractionIdentifier(
+    interaction:
+      | ChatInputCommandInteraction<"cached">
+      | MessageContextMenuCommandInteraction<"cached">
+      | UserContextMenuCommandInteraction<"cached">
+      | ButtonInteraction<"cached">
+      | StringSelectMenuInteraction<"cached">
+      | ChannelSelectMenuInteraction<"cached">
+      | RoleSelectMenuInteraction<"cached">
+      | MentionableSelectMenuInteraction<"cached">
+      | UserSelectMenuInteraction<"cached">
+      | ModalSubmitInteraction<"cached">
+  ) {
+    switch (interaction.type) {
+      case InteractionType.ApplicationCommand: {
+        return interaction.commandId;
+      }
+      case InteractionType.MessageComponent: {
+        return interaction.customId;
+      }
+      case InteractionType.ModalSubmit: {
+        return interaction.customId;
+      }
+    }
+  }
+
   private resolveValue(
     source: CooldownResolver | number,
     interaction:
       | ChatInputCommandInteraction<"cached">
       | MessageContextMenuCommandInteraction<"cached">
       | UserContextMenuCommandInteraction<"cached">
+      | ButtonInteraction<"cached">
+      | StringSelectMenuInteraction<"cached">
+      | ChannelSelectMenuInteraction<"cached">
+      | RoleSelectMenuInteraction<"cached">
+      | MentionableSelectMenuInteraction<"cached">
+      | UserSelectMenuInteraction<"cached">
+      | ModalSubmitInteraction<"cached">
   ) {
     return typeof source === "function" ? source(interaction) : source;
   }
