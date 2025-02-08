@@ -15,7 +15,7 @@
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
     "@types/bun": "1.2.2",
-    "prisma": "^6.3.0",
+    "prisma": "^6.3.1",
     "prisma-case-format": "^2.2.1"
   },
   "peerDependencies": {
