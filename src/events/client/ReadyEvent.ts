@@ -9,6 +9,15 @@ export class ReadyEvent extends BaseEvent<"ready"> {
 
   async execute() {
     await this.connectToDatabase();
+
+    process.on("unhandledRejection", error => {
+      this.flucord.logger.error("Unhandled rejection");
+      this.flucord.logger.error(error);
+    });
+    process.on("uncaughtException", error => {
+      this.flucord.logger.error("Uncaught exception");
+      this.flucord.logger.error(error);
+    });
   }
 
   private async connectToDatabase() {

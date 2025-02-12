@@ -24,7 +24,7 @@
   "dependencies": {
     "@prisma/client": "6.3.1",
     "@sapphire/ratelimits": "^2.4.11",
-    "discord.js": "^14.17.3",
+    "discord.js": "^14.18.0",
     "flucord": "1.7.3"
   }
 }

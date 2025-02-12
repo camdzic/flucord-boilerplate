@@ -13,12 +13,7 @@ import {
   type UserContextMenuCommandInteraction,
   type UserSelectMenuInteraction
 } from "discord.js";
-import {
-  BaseGuard,
-  CooldownGuardException,
-  GuardExecutionFailException,
-  Time
-} from "flucord";
+import { BaseGuard, Time } from "flucord";
 
 type CooldownResolver = (
   interaction:
@@ -68,9 +63,7 @@ export class CooldownGuard extends BaseGuard<"any"> {
       | ModalSubmitInteraction<CacheType>
   ) {
     if (!interaction.inCachedGuild()) {
-      throw new GuardExecutionFailException(
-        "While executing CooldownGuard, guild was not found"
-      );
+      return this.error("Interaction guild is not available.");
     }
 
     const identifier = this.getInteractionIdentifier(interaction);
@@ -88,15 +81,19 @@ export class CooldownGuard extends BaseGuard<"any"> {
         `${interaction.guild.id}:${interaction.user.id}`
       );
       if (rateLimit.limited) {
-        throw new CooldownGuardException(
-          `You can use this command again in \`${this.formatCooldownTime(
+        return this.error(
+          `You can use this command again in **${this.formatCooldownTime(
             rateLimit.remainingTime
-          )}\``
+          )}**.`
         );
       }
 
       rateLimit.consume();
+
+      return this.ok();
     }
+
+    return this.ok();
   }
 
   private getInteractionIdentifier(
