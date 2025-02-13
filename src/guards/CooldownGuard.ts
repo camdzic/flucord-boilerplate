@@ -63,7 +63,10 @@ export class CooldownGuard extends BaseGuard<"any"> {
       | ModalSubmitInteraction<CacheType>
   ) {
     if (!interaction.inCachedGuild()) {
-      return this.error("Interaction guild is not available.");
+      return this.error({
+        name: "interactionGuildNotAvailable",
+        message: "Interaction guild is not available."
+      });
     }
 
     const identifier = this.getInteractionIdentifier(interaction);
@@ -81,11 +84,12 @@ export class CooldownGuard extends BaseGuard<"any"> {
         `${interaction.guild.id}:${interaction.user.id}`
       );
       if (rateLimit.limited) {
-        return this.error(
-          `You can use this command again in **${this.formatCooldownTime(
+        return this.error({
+          name: "interactionRateLimited",
+          message: `You can use this command again in **${this.formatCooldownTime(
             rateLimit.remainingTime
           )}**.`
-        );
+        });
       }
 
       rateLimit.consume();
