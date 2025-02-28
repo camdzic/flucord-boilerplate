@@ -7,7 +7,7 @@
         "@prisma/client": "6.3.1",
         "@sapphire/ratelimits": "^2.4.11",
         "discord.js": "^14.18.0",
-        "flucord": "1.9.0",
+        "flucord": "1.9.1",
       },
       "devDependencies": {
         "@biomejs/biome": "1.9.4",
@@ -291,7 +291,7 @@
 
     "find-up": ["find-up@5.0.0", "", { "dependencies": { "locate-path": "^6.0.0", "path-exists": "^4.0.0" } }, "sha512-78/PXT1wlLLDgTzDs7sjq9hzz0vXD+zn+7wypEe4fXQxCmdmqfGsEPQxmiCSQI3ajFV91bVSsvNtrJRiW6nGng=="],
 
-    "flucord": ["flucord@1.9.0", "", { "dependencies": { "@sapphire/result": "^2.7.2", "colorette": "^2.0.20", "cron": "^3.5.0", "ts-cron-validator": "^1.1.5", "zod": "^3.24.2" }, "peerDependencies": { "typescript": "^5.7.3" } }, "sha512-GZOdt+sSSs4zbllC4jtQozOr9BlIqYkjm9WaDJgK1Pd36eSmJhHpHmcaG8s6XCyzmQ3MuhIewi29owXUMRejMw=="],
+    "flucord": ["flucord@1.9.1", "", { "dependencies": { "@sapphire/result": "^2.7.2", "colorette": "^2.0.20", "cron": "^3.5.0", "ts-cron-validator": "^1.1.5", "zod": "^3.24.2" }, "peerDependencies": { "typescript": "^5.7.3" } }, "sha512-dTlmmyeGVRdStKzEOqJPZxlaSPNU2JcS/+h2x+LFZhHzm3XDzC8BYJLV0TezUiS0TYQy1NI+LcM5voOCuMt0pQ=="],
 
     "fp-ts": ["fp-ts@2.16.0", "", {}, "sha512-bLq+KgbiXdTEoT1zcARrWEpa5z6A/8b7PcDW7Gef3NSisQ+VS7ll2Xbf1E+xsgik0rWub/8u0qP/iTTjj+PhxQ=="],
 
